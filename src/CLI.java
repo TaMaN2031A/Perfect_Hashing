@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 public class CLI {
     Dictionary dictionary = null;
     String type = "n/a";
+    int size = 0;
 
     void Welcome() {
         System.out.println("\033[0;31mWelcome to Our Dictionary\n\033[0m");
@@ -26,9 +27,24 @@ public class CLI {
                 if (!type.equals("N2") && !type.equals("N")) {
                     System.out.println("PLease Enter a Valid Option!");
                 }
-                dictionary = new Dictionary(type);
                 System.out.print("\033\143");
                // Thread.sleep(200);
+                System.out.print("\033\143");
+            } catch (Exception e) {
+
+            }
+        }
+        while (size < 0) {
+            try {
+                System.out.println("\033[0;32mInsert the value of N: \033");
+                size = sc.nextInt();
+                if (size < 0) {
+                    System.out.println("PLease Enter a Valid Option!");
+                } else {
+                    dictionary = new Dictionary(type, size);
+                }
+                System.out.print("\033\143");
+                // Thread.sleep(200);
                 System.out.print("\033\143");
             } catch (Exception e) {
 

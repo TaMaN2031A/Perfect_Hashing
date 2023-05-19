@@ -10,13 +10,11 @@ import java.util.Scanner;
 public class Dictionary {
     Perfect_Hashing_Interface hash;
     Factory factory = new Factory();
-    String type;
 
     long start,end;
 
-    public Dictionary(String type){
-        this.type = type;
-        hash = factory.getPerfectHASHING(type);
+    public Dictionary(String type, int size){
+        hash = factory.getPerfectHASHING(type, size);
     }
 
 
@@ -27,16 +25,16 @@ public class Dictionary {
     }
 
     void BatchInsert(String route) throws IOException, InterruptedException {
-        int count=0,filesize=0;
+        int count=0, fileSize=0;
         start=System.nanoTime();
         Path path = Paths.get(route);
         List<String> lines = Files.readAllLines(path);
-        filesize = lines.size();
+        fileSize = lines.size();
      //   count = hash.batchInsert((ArrayList<String>) lines);
         int[] state = new int[3];
-        for(int i = 0; i < lines.size(); i++){
-            state[insert(lines.get(i))]++;
-            System.out.println("no. Elements is now " + hash.getElementsOFtable());
+        for (String line : lines) {
+            state[insert(line)]++;
+            System.out.println("no. Elements is now " + hash.getElementsOfTable());
         }
         end=System.nanoTime();
         System.out.println("\nBatch insertion Done Successfully!");
@@ -44,7 +42,7 @@ public class Dictionary {
         System.out.println(state[0]+" were already their");
         System.out.println(state[2]+" new keys inserted with rehashing their inner table!");
 
-        //System.out.println((filesize-count)+" keys already exist in the Dictionary!");
+        //System.out.println((fileSize-count)+" keys already exist in the Dictionary!");
         System.out.println("\nTime of insertion is : "+(end-start)+" ns");
 
     }
@@ -70,8 +68,8 @@ public class Dictionary {
         Path path = Paths.get(route);
         List<String> lines = Files.readAllLines(path);
         int deleted = 0, notDeleted = 0;
-        for(int i = 0; i < lines.size(); i++){
-            if(delete(lines.get(i)))
+        for (String line : lines) {
+            if (delete(line))
                 deleted++;
             else
                 notDeleted++;

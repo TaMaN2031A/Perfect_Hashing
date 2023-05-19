@@ -8,6 +8,11 @@ import static java.lang.Math.abs;
 import static java.lang.Math.pow;
 
 public class n_Hashing implements Perfect_Hashing_Interface {
+
+    public n_Hashing(int size) {
+        mainHashing = new secondLevel[size];
+    }
+
     private class secondLevel{
         private String[] internalValues;
 
@@ -89,7 +94,7 @@ public class n_Hashing implements Perfect_Hashing_Interface {
                     }
                 }
                 internalValues[index] = iter;
-                System.out.println("Successfuly inserted "+ iter);
+                System.out.println("Successfully inserted "+ iter);
                 returned[1]++;
             }
             returned[0] = 1;
@@ -147,7 +152,7 @@ public class n_Hashing implements Perfect_Hashing_Interface {
     private long hashFunction(long number){
         return (a*number+b)%p%m;
     }
-    public long getElementsOFtable() {
+    public long getElementsOfTable() {
         return 0;
     }
 

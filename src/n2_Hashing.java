@@ -1,62 +1,59 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
-import java.util.Scanner;
 
 import static java.lang.Math.*;
 
 public class n2_Hashing implements Perfect_Hashing_Interface{
 
+    public n2_Hashing(int size) {
+        sizeOfTable = (int)pow(2, ceil(2 * log(size)/log(2)));
+        Random random = new Random();
+        a = abs(random.nextInt() + 5);
+        b = abs(random.nextInt() + 5);
+        hashTable = new String[sizeOfTable];
+    }
 
     String[] hashTable;
 
     ArrayList<String> beforeHashing = new ArrayList<>();
     private long p = 5000000021L; // A prime that's bigger than a, (x-y) where x and y are the two keys
-    private long sizeOFTable;
+    private final int sizeOfTable;
 
-    public long getElementsOFtable() {
-        return elementsOFtable;
+    public long getElementsOfTable() {
+        return elementsOfTable;
     }
 
-    private long elementsOFtable = 0;
+    private long elementsOfTable = 0;
 
     private long a;
     private long b;
 
-    public n2_Hashing(){
+    private int[] rehash() {
         Random random = new Random();
         a = abs(random.nextInt() + 5);
         b = abs(random.nextInt() + 5);
-        sizeOFTable = 1;
-        hashTable = new String[(int)sizeOFTable];
-    }
+        hashTable = new String[sizeOfTable];
 
-    private int[] rehash(){
-        Random random = new Random();
-        a = abs(random.nextInt() + 5);
-        b = abs(random.nextInt() + 5);
-        sizeOFTable = elementsOFtable*elementsOFtable;
-        hashTable = new String[(int)sizeOFTable];
-        for(int i = 0; i < elementsOFtable; i++){
+        for (int i = 0; i < elementsOfTable; i++) {
             hashTable[i] = null;
         }
         int[] returned = new int[2];
-//        System.out.println("Number of elements here is: " + elementsOFtable);
+//        System.out.println("Number of elements here is: " + elementsOfTable);
 //        System.out.println("Elements are");
 //        for(String iter: beforeHashing){
 //            System.out.print(iter + " ");
 //        }
        // System.out.println();
-        for(String iter: beforeHashing){
+        for (String iter: beforeHashing) {
 //                Thread.sleep(1000);
 //            System.out.println("Value of string is "+ iter);
-            int index = (int)(hashFunction(toKey(iter)));
+            int index = hashFunction(toKey(iter));
 //            System.out.println("toKey returned "+ toKey(iter));
 //            System.out.println("toIndex returned "+ hashFunction(toKey(iter)));
 //            System.out.println("Index is "+ index);
         //    System.out.println(index);
-            if(hashTable[index] != null){
+            if (hashTable[index] != null){
                 if(hashTable[index].equals(iter)){
                     continue;
                 }
@@ -69,12 +66,13 @@ public class n2_Hashing implements Perfect_Hashing_Interface{
                 }
             }
             hashTable[index] = iter;
-//            System.out.println("Successfuly inserted "+ iter);
+//            System.out.println("Successfully inserted "+ iter);
             returned[1]++;
         }
         returned[0] = 1;
         return returned;
     }
+
     private long toKey(String key) {
         long hashVal = 0;
         for(int i = 0; i < key.length(); i++){
@@ -85,45 +83,47 @@ public class n2_Hashing implements Perfect_Hashing_Interface{
         }
         return hashVal;
     }
-    private long hashFunction(long number){
-        return (long)((floor(((double)a)*number/b))+ceil(((double) b)*number/a))%p%sizeOFTable;
+
+    private int hashFunction(long number) {
+        return (int)((int)((floor(((double)a)*number/b))+ceil(((double) b)*number/a))%p%sizeOfTable);
     }
+
     @Override
     public boolean search(String value){
-        int index = (int)hashFunction(toKey(value));
+        int index = hashFunction(toKey(value));
         return Objects.equals(hashTable[index], value);
     }
 
     @Override
-    public int insert(String value) throws InterruptedException {
-        if(elementsOFtable == sizeOFTable){
-            elementsOFtable++;
+    public int insert(String value) {
+        if (elementsOfTable == sizeOfTable) {
+            elementsOfTable++;
             beforeHashing.add(value);
             int[] arr;
-            while (true){
+            while (true) {
                 beforeHashing.add(value);
-                elementsOFtable++;
+                elementsOfTable++;
                 arr = rehash();
-                if(arr[0] == 1){
+                if (arr[0] == 1) {
                     break;
                 }
             }
             return 2;
-        }else{
-            int key = (int)hashFunction(toKey(value));
-            if(hashTable[key] == null){
+        } else {
+            int key = hashFunction(toKey(value));
+            if (hashTable[key] == null) {
                 beforeHashing.add(value);
-                elementsOFtable++;
+                elementsOfTable++;
                 hashTable[key] = value;
                 return 1;
-            }else{
-                if(hashTable[key].equals(value)){
+            } else {
+                if (hashTable[key].equals(value)) {
                     return 0;
-                }else{
+                } else {
                     int[] arr;
-                    while (true){
+                    while (true) {
                         beforeHashing.add(value);
-                        elementsOFtable++;
+                        elementsOfTable++;
                         arr = rehash();
                         if(arr[0] == 1){
                             break;
@@ -137,8 +137,8 @@ public class n2_Hashing implements Perfect_Hashing_Interface{
     }
 
     @Override
-    public boolean delete(String value) throws IOException { // True if deleted, false if not
-        int index = (int)hashFunction(toKey(value));
+    public boolean delete(String value) { // True if deleted, false if not
+        int index = hashFunction(toKey(value));
         if(hashTable[index] == null)
         {
             return false;
@@ -153,6 +153,6 @@ public class n2_Hashing implements Perfect_Hashing_Interface{
     }
 
     public int getSize(){
-        return (int)sizeOFTable;
+        return sizeOfTable;
     }
 }
