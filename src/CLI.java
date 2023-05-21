@@ -29,10 +29,10 @@ public class CLI {
                 type = sc.nextLine();
                 if (!type.equals("N2") && !type.equals("N")) {
                     System.out.println("PLease Enter a Valid Option!");
+                    Thread.sleep(1000);
                 }
                 // System.out.print("\033\143");
-               // Thread.sleep(200);
-                // System.out.print("\033\143");
+               System.out.print("\033\143");
             } catch (Exception e) {
 
             }
@@ -42,26 +42,30 @@ public class CLI {
             try {
                 System.out.println("\033[0;32mInsert the value of N: \033");
                 size = sc.nextInt();
-                
                 if (size < 0) {
                     System.out.println("PLease Enter a Valid Option!");
+                    Thread.sleep(2000);
                 } else {
                     dictionary = new Dictionary(type, size);
                 }
                 System.out.print("\033\143");
                 // Thread.sleep(200);
-                System.out.print("\033\143");
+                // System.out.print("\033\143");
             } catch (Exception e) {
-
+                System.out.println("Please Enter a Valid N!");
+                sc.nextLine();
+                Thread.sleep(2000);
+                System.out.print("\033\143");
             }
         }
 
-        System.out.println("\033[0;32m" + type + " is Selected!\033[0m");
-        
-        
+        System.out.println("\033[0;32m" + type + " is Selected!\033[0m"); 
+        Thread.sleep(2000);    
         String[] in;
         sc.nextLine();
-        while (true) {
+
+        try{
+            while (true) {
                 System.out.print("\033\143");
                 this.options();
                 in = new String[20];
@@ -74,8 +78,9 @@ public class CLI {
                     break;
                 }
                 if (in[0].equals("size")) {
-                    System.out.println("i am here");
                     System.out.println(dictionary.getSize());
+                    Thread.sleep(2500);
+                    continue;
                 }
                 
                 if (tokenizer.hasMoreElements()) {
@@ -83,7 +88,7 @@ public class CLI {
                 } else {
                     System.out.print("\033\143");
                     System.out.println("Enter a Valid Option!");
-                 //   Thread.sleep(1500);
+                    Thread.sleep(2000);
                     continue;
                 }
                 if (tokenizer.hasMoreElements())
@@ -91,7 +96,7 @@ public class CLI {
                 if (tokenizer.hasMoreElements()) {
                     System.out.print("\033\143");
                     System.out.println("Too many Arguments!");
-                //    Thread.sleep(1500);
+                   Thread.sleep(2500);
                     continue;
                 }
 
@@ -109,20 +114,20 @@ public class CLI {
                     else {
                         System.out.print("\033\143");
                         System.out.println("Please Enter a Valid Option!");
-                        //Thread.sleep(1500);
-                       // continue;
+                        Thread.sleep(2500);
+                        continue;
                     }
                 } else {
                     System.out.print("\033\143");
                     System.out.println("Please Enter a Valid Option!");
                 }
+
                 Thread.sleep(2000);
-//            }catch (Exception e){
-//                System.out.print("\033\143");
-//                System.out.println("Enter a Valid Option!");
-//            }
-
-        }
-
+           }}
+           catch (Exception e){
+               System.out.print("\033\143");
+               System.out.println("Enter a Valid Option!");
+               Thread.sleep(2000);
+           }
     }
 }

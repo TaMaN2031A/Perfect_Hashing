@@ -18,6 +18,7 @@ public Dictionary(String type, int size) throws InterruptedException{
 }
 
 void BatchInsert(String route) throws IOException, InterruptedException {
+        System.out.println("i am here ");
         int count=0, fileSize=0;
         start=System.nanoTime();
         Path path = Paths.get(route);
@@ -34,9 +35,9 @@ void BatchInsert(String route) throws IOException, InterruptedException {
         System.out.println(state[1]+" new keys inserted without hashing!");
         System.out.println(state[0]+" were already their");
         System.out.println(state[2]+" new keys inserted with rehashing their inner table!");
-
         //System.out.println((fileSize-count)+" keys already exist in the Dictionary!");
         System.out.println("\nTime of insertion is : "+(end-start)+" ns");
+        Thread.sleep(3000);
 
     }
 
@@ -52,13 +53,13 @@ void search(String a) {
 int insert(String a) throws IOException, InterruptedException {
         int x = hash.insert(a);
         if(x == 0){
-            System.out.println("Already found");
+            System.out.println(a+" Already found");
         } else if(x == 1){
-            System.out.println("Added successfully");
+            System.out.println(a+ " Added successfully");
         }else if(x==2){
             System.out.println("Hash Table is Full!");
         }else{
-            System.out.println("Added, but we rehashed the code");
+            System.out.println(a+" Added, but we rehashed the code");
         }
         return x;
     }
@@ -79,21 +80,22 @@ void BatchDelete(String route) throws IOException, InterruptedException {
         System.out.println(deleted+" Successfully deleted Items!");
         System.out.println(notDeleted+" Doesn't exist");
         System.out.println("\nTime of delete is : "+(end-start)+" ns");
+        Thread.sleep(3000);
 
     }
     
 boolean delete(String a) throws IOException {
         boolean x = hash.delete(a);
         if(x){
-            System.out.println("Successfully Deleted");
+            System.out.println(a+" Successfully Deleted");
         }else{
-            System.out.println("Doesn't exist");
+            System.out.println(a+" Doesn't exist");
         }
         return x;
     }
 
-int getSize(){
-        return hash.getSize();
+long getSize(){
+        return hash.getElementsOfTable();
     }
 
 void ends() throws IOException {

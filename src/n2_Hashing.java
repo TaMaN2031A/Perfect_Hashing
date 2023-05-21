@@ -21,16 +21,15 @@ public n2_Hashing(int size) throws InterruptedException {
         Random random = new Random();
         a = abs(random.nextInt());
         b = abs(random.nextInt());
-        System.out.println("a is "+a+" b is "+b);
         hashTable = new String[sizeOfTable];
-        Thread.sleep(5000);
+        Thread.sleep(4000);
     }
   
 private boolean rehash2(String value){
+    System.out.println("i am rehashing");
     Random random = new Random();
     a = abs(random.nextInt());
     b = abs(random.nextInt());
-    System.out.println("a is "+a+" b is "+b);
     String[] prevtable = hashTable; 
     hashTable = new String[sizeOfTable];
     int key;
@@ -74,11 +73,6 @@ public boolean search(String value){
         return Objects.equals(hashTable[index], value);
 }
 public int insert(String value) {    
-    for(int i=0;i<4;i++){
-        if(hashTable[i]!=null){
-            System.out.println("element "+hashTable[i]+" with index "+i);
-        }
-    }
     if (numberofelements == sizeOfTable) {
             int index=hashFunction(toKey(value));
             System.out.println("index is "+index);
@@ -88,15 +82,12 @@ public int insert(String value) {
             return 0;
     }else {
             int key = hashFunction(toKey(value));
-            System.out.println("index is "+ key);
             if (hashTable[key] == null) {
                 numberofelements++;
                 hashTable[key] = value;
-                System.out.println("current elements are "+getElementsOfTable());
                 return 1;
             } else {
                 if (hashTable[key].equals(value)) {
-                    System.out.println("current elements are "+getElementsOfTable());
                     return 0;
                 } else {
                     boolean check=false;
@@ -106,7 +97,6 @@ public int insert(String value) {
                         count++;   // number of rehashings
                     }
                     numberofelements++;
-                    System.out.println("current elements are "+getElementsOfTable());
                     System.out.println("We Rehashed "+count+" Times");
                     return 3;
                 }
@@ -131,8 +121,9 @@ public boolean delete(String value) { // True if deleted, false if not
 public int getSize() {
     return sizeOfTable;
     }
-public long getElementsOfTable() {
-return numberofelements;
+public long getElementsOfTable(){
+    return numberofelements;
+
 }
 
 }
