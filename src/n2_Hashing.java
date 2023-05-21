@@ -7,7 +7,6 @@ import java.util.Random;
 import static java.lang.Math.*;
 
 public class n2_Hashing implements Perfect_Hashing_Interface{
-
     String[] hashTable;
     private long p = 5000000021L; // A prime that's bigger than a, (x-y) where x and y are the two keys
     private final int sizeOfTable;
@@ -24,7 +23,6 @@ public n2_Hashing(int size) throws InterruptedException {
         hashTable = new String[sizeOfTable];
         Thread.sleep(4000);
     }
-  
 private boolean rehash2(String value){
     System.out.println("i am rehashing");
     Random random = new Random();
@@ -125,5 +123,6 @@ public long getElementsOfTable(){
     return numberofelements;
 
 }
+
 
 }

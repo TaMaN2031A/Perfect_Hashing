@@ -5,10 +5,6 @@ public interface Perfect_Hashing_Interface {
     int insert(String node) throws IOException, InterruptedException;
     boolean delete(String node) throws IOException;
     boolean search(String node);
-
     int getSize();
-
     long getElementsOfTable();
-//int batchInsert(ArrayList<String> input) throws IOException, InterruptedException;
-//   void ends() throws IOException;
 }

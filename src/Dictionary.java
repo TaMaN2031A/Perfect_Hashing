@@ -10,13 +10,11 @@ import java.util.Scanner;
 public class Dictionary {
     Perfect_Hashing_Interface hash;
     Factory factory = new Factory();
-
     long start,end;
 
 public Dictionary(String type, int size) throws InterruptedException{
         hash = factory.getPerfectHASHING(type, size);
 }
-
 void BatchInsert(String route) throws IOException, InterruptedException {
         System.out.println("i am here ");
         int count=0, fileSize=0;
@@ -37,10 +35,9 @@ void BatchInsert(String route) throws IOException, InterruptedException {
         System.out.println(state[2]+" new keys inserted with rehashing their inner table!");
         //System.out.println((fileSize-count)+" keys already exist in the Dictionary!");
         System.out.println("\nTime of insertion is : "+(end-start)+" ns");
-        Thread.sleep(3000);
+        Thread.sleep(8000);
 
     }
-
 void search(String a) {
         boolean res = hash.search(a);
         if(res){
@@ -48,8 +45,7 @@ void search(String a) {
         }else{
             System.out.println(a+" Doesn't exist !");
         }
-    }
-    
+    }   
 int insert(String a) throws IOException, InterruptedException {
         int x = hash.insert(a);
         if(x == 0){
@@ -63,7 +59,6 @@ int insert(String a) throws IOException, InterruptedException {
         }
         return x;
     }
-
 void BatchDelete(String route) throws IOException, InterruptedException {
         start=System.nanoTime();
         Path path = Paths.get(route);
@@ -82,8 +77,7 @@ void BatchDelete(String route) throws IOException, InterruptedException {
         System.out.println("\nTime of delete is : "+(end-start)+" ns");
         Thread.sleep(3000);
 
-    }
-    
+    }  
 boolean delete(String a) throws IOException {
         boolean x = hash.delete(a);
         if(x){
@@ -93,15 +87,16 @@ boolean delete(String a) throws IOException {
         }
         return x;
     }
-
 long getSize(){
         return hash.getElementsOfTable();
     }
-
 void ends() throws IOException {
         System.out.println("\033[0;31mExecution Times have been writen in files!\033[0m");
         System.out.println("\033[0;32m\nThanks for Using Our Dictionary\033[0m");
        // hash.ends();
     }
+
+
+
 
 }

@@ -12,8 +12,7 @@ public class CLI {
     void Welcome() {
         System.out.println("\033[0;31mWelcome to Our Dictionary\n\033[0m");
     }
-
-
+    
     void options() {
         System.out.println("\033[0;31mChoose an Option from the following:\033[0m");
         System.out.println("\033[0;34m1)Insert a new key.\n2)Delete an existing key.\n3)Search for a key.\n4)Batch insert.\n5)Batch Delete.\n6)size.\n7)Exit.\n\nEnter an Option:\033[0m");
