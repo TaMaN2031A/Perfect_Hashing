@@ -74,7 +74,7 @@ public class CLI {
                     break;
                 }
                 if (in[0].equals("size")) {
-                    System.out.println("heyyy");
+                    System.out.println("i am here");
                     System.out.println(dictionary.getSize());
                 }
                 
@@ -116,8 +116,7 @@ public class CLI {
                     System.out.print("\033\143");
                     System.out.println("Please Enter a Valid Option!");
                 }
-                Thread.sleep(6000);
-             //   Thread.sleep(2500);
+                Thread.sleep(2000);
 //            }catch (Exception e){
 //                System.out.print("\033\143");
 //                System.out.println("Enter a Valid Option!");

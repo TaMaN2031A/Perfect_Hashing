@@ -49,6 +49,7 @@ private boolean rehash2(String value){
     
     if(hashTable[key]!=null){
         hashTable=prevtable;
+        return false;
     }else{
         hashTable[key]=value;
     }
