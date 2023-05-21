@@ -13,13 +13,16 @@ public class CLI {
         System.out.println("\033[0;31mWelcome to Our Dictionary\n\033[0m");
     }
 
+
     void options() {
         System.out.println("\033[0;31mChoose an Option from the following:\033[0m");
         System.out.println("\033[0;34m1)Insert a new key.\n2)Delete an existing key.\n3)Search for a key.\n4)Batch insert.\n5)Batch Delete.\n6)size.\n7)Exit.\n\nEnter an Option:\033[0m");
     }
 
+
     void run() throws IOException, InterruptedException {
         Scanner sc = new Scanner(System.in);
+        
         while (!type.equals("N2") && !type.equals("N")) {
             try {
                 System.out.println("\033[0;32mInsert \"N2\" for using N^2 Perfect Hashing, or \"N\" for N Perfect Hashing\033[0m");
@@ -27,17 +30,19 @@ public class CLI {
                 if (!type.equals("N2") && !type.equals("N")) {
                     System.out.println("PLease Enter a Valid Option!");
                 }
-                System.out.print("\033\143");
+                // System.out.print("\033\143");
                // Thread.sleep(200);
-                System.out.print("\033\143");
+                // System.out.print("\033\143");
             } catch (Exception e) {
 
             }
         }
-        while (size < 0) {
+
+        while (size <= 0) {
             try {
                 System.out.println("\033[0;32mInsert the value of N: \033");
                 size = sc.nextInt();
+                
                 if (size < 0) {
                     System.out.println("PLease Enter a Valid Option!");
                 } else {
@@ -50,9 +55,12 @@ public class CLI {
 
             }
         }
+
         System.out.println("\033[0;32m" + type + " is Selected!\033[0m");
-        // Thread.sleep(1500);
+        
+        
         String[] in;
+        sc.nextLine();
         while (true) {
                 System.out.print("\033\143");
                 this.options();
@@ -66,8 +74,10 @@ public class CLI {
                     break;
                 }
                 if (in[0].equals("size")) {
+                    System.out.println("heyyy");
                     System.out.println(dictionary.getSize());
                 }
+                
                 if (tokenizer.hasMoreElements()) {
                     in[1] = tokenizer.nextToken();
                 } else {
@@ -84,7 +94,6 @@ public class CLI {
                 //    Thread.sleep(1500);
                     continue;
                 }
-
 
                 if (in[0].equals("insert")) {
                      dictionary.insert(in[1]);
@@ -107,6 +116,7 @@ public class CLI {
                     System.out.print("\033\143");
                     System.out.println("Please Enter a Valid Option!");
                 }
+                Thread.sleep(6000);
              //   Thread.sleep(2500);
 //            }catch (Exception e){
 //                System.out.print("\033\143");

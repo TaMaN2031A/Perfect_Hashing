@@ -3,7 +3,7 @@
 //import RB.RbTree;
 
 public class Factory <T>{
-    public Perfect_Hashing_Interface getPerfectHASHING(String treeType, int size)
+    public Perfect_Hashing_Interface getPerfectHASHING(String treeType, int size) throws InterruptedException
     {
         if(treeType.equals("N"))
             return new n_Hashing(size);

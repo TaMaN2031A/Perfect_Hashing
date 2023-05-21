@@ -8,10 +8,7 @@ public interface Perfect_Hashing_Interface {
 
     int getSize();
 
-    long getElementsOfTable();    //int batchInsert(ArrayList<String> input) throws IOException, InterruptedException;
-
-
-
-
- //   void ends() throws IOException;
+    long getElementsOfTable();
+//int batchInsert(ArrayList<String> input) throws IOException, InterruptedException;
+//   void ends() throws IOException;
 }

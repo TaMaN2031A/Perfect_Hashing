@@ -13,18 +13,11 @@ public class Dictionary {
 
     long start,end;
 
-    public Dictionary(String type, int size){
+public Dictionary(String type, int size) throws InterruptedException{
         hash = factory.getPerfectHASHING(type, size);
-    }
+}
 
-
-    void ends() throws IOException {
-        System.out.println("\033[0;31mExecution Times have been writen in files!\033[0m");
-        System.out.println("\033[0;32m\nThanks for Using Our Dictionary\033[0m");
-       // hash.ends();
-    }
-
-    void BatchInsert(String route) throws IOException, InterruptedException {
+void BatchInsert(String route) throws IOException, InterruptedException {
         int count=0, fileSize=0;
         start=System.nanoTime();
         Path path = Paths.get(route);
@@ -47,23 +40,30 @@ public class Dictionary {
 
     }
 
-    void search(String a) {
+void search(String a) {
         boolean res = hash.search(a);
-        System.out.println("Search for:" + a + "'s result is: " + res);
+        if(res){
+            System.out.println(a+" Found Successfully!");
+        }else{
+            System.out.println(a+" Doesn't exist !");
+        }
     }
-    int insert(String a) throws IOException, InterruptedException {
+    
+int insert(String a) throws IOException, InterruptedException {
         int x = hash.insert(a);
         if(x == 0){
-            System.out.println("Already found it");
+            System.out.println("Already found");
         } else if(x == 1){
             System.out.println("Added successfully");
+        }else if(x==2){
+            System.out.println("Hash Table is Full!");
         }else{
             System.out.println("Added, but we rehashed the code");
         }
         return x;
     }
 
-    void BatchDelete(String route) throws IOException, InterruptedException {
+void BatchDelete(String route) throws IOException, InterruptedException {
         start=System.nanoTime();
         Path path = Paths.get(route);
         List<String> lines = Files.readAllLines(path);
@@ -81,7 +81,8 @@ public class Dictionary {
         System.out.println("\nTime of delete is : "+(end-start)+" ns");
 
     }
-    boolean delete(String a) throws IOException {
+    
+boolean delete(String a) throws IOException {
         boolean x = hash.delete(a);
         if(x){
             System.out.println("Successfully Deleted");
@@ -91,8 +92,14 @@ public class Dictionary {
         return x;
     }
 
-    int getSize(){
+int getSize(){
         return hash.getSize();
+    }
+
+void ends() throws IOException {
+        System.out.println("\033[0;31mExecution Times have been writen in files!\033[0m");
+        System.out.println("\033[0;32m\nThanks for Using Our Dictionary\033[0m");
+       // hash.ends();
     }
 
 }
